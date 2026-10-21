@@ -27,6 +27,19 @@ def load_package_module():
     return mod
 
 
+VERIFY_SCRIPT_PATH = Path(__file__).resolve().parent.parent / "skills" / "atb-game-package" / "scripts" / "verify-package.py"
+
+
+def load_verify_module():
+    if not VERIFY_SCRIPT_PATH.is_file():
+        raise ImportError(f"Cannot find verification script at {VERIFY_SCRIPT_PATH}")
+    spec = importlib.util.spec_from_file_location("verify_package", VERIFY_SCRIPT_PATH)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["verify_package"] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
 class TestPackageGame(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.TemporaryDirectory(prefix="test_pkg_")
@@ -160,6 +173,24 @@ class TestPackageGame(unittest.TestCase):
             # External attr holds unix permissions in high 16 bits
             perm = (macos_info.external_attr >> 16) & 0o777
             self.assertTrue(bool(perm & 0o111), f"Expected executable permission in zip, got octal: {oct(perm)}")
+
+    def test_verify_package_helpers(self):
+        vmod = load_verify_module()
+        self.assertTrue(hasattr(vmod, "verify_portable_bundle"))
+        self.assertTrue(hasattr(vmod, "verify_release_zip"))
+        self.assertTrue(hasattr(vmod, "compute_png_colored_ratio"))
+
+        # Test on packaged game fixture
+        pmod = load_package_module()
+        layout = pmod.resolve_game_layout(self.game_dir)
+        dist_dir = self.game_dir / "dist"
+        res = pmod.package_game(self.game_dir, out_dir=dist_dir)
+
+        p_issues = vmod.verify_portable_bundle(res["portable_dir"])
+        self.assertEqual(p_issues, [], f"Portable bundle issues: {p_issues}")
+
+        z_issues = vmod.verify_release_zip(res["release_zip"])
+        self.assertEqual(z_issues, [], f"Release zip issues: {z_issues}")
 
 
 if __name__ == "__main__":
