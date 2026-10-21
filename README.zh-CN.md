@@ -173,6 +173,11 @@ cd ATBGamePort
   - [`scripts/package-game.py`](./skills/atb-game-package/scripts/package-game.py)：纯 Python 3 标准库双模打包与启动器生成引擎。
   - [`scripts/verify-package.py`](./skills/atb-game-package/scripts/verify-package.py)：基于纯 `file:///` 协议的无头 Chrome 自动化零报错与 $\ge 90\%$ 着色率验证脚本。
 
+- **[atb-game-to-githubpage](./skills/atb-game-to-githubpage/SKILL.md)**（[详细说明文档](./docs/atb-game-to-githubpage.md)）：零污染 GitHub Pages 一键自动化部署技能，自动穿透资产跨目录软链接、诊断仓库二级子路径、注入 `.nojekyll` 并生成官方 GitHub Actions 工作流。
+  - [`SYMLINKS-AND-SUBPATHS.md`](./skills/atb-game-to-githubpage/SYMLINKS-AND-SUBPATHS.md)：跨目录资产软链接穿透实体化、二级子路径相对路由与 `.nojekyll` Jekyll 过滤消除规范。
+  - [`WORKFLOW-AND-PAGES.md`](./skills/atb-game-to-githubpage/WORKFLOW-AND-PAGES.md)：官方 GitHub Pages 工作流架构、OIDC 权限配置、自定义域名 CNAME 支持与仓库 Settings 开启指引。
+  - [`scripts/deploy.py`](./skills/atb-game-to-githubpage/scripts/deploy.py)：纯 Python 3 标准库一键部署扫描、本地暂存沙盒验证与工作流生成引擎。
+
 ---
 
 ## 仓库治理规范

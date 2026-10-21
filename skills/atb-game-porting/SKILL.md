@@ -87,3 +87,6 @@ Upon completing the initial `MIGRATE.md` specification and initial full codebase
 
 ### Step 5: Optional Standalone Packaging (`atb-game-package`)
 To package the completed port into a zero-dependency offline bundle (`<game>-standalone.html` or portable directory with native launchers), invoke [`atb-game-package`](../atb-game-package/SKILL.md) or run `python3 skills/atb-game-package/scripts/package-game.py --input-dir target/<game_name>`.
+
+### Step 6: Optional GitHub Pages Deployment (`atb-game-to-githubpage`)
+To deploy the ported game to GitHub Pages via automated GitHub Actions, invoke [`atb-game-to-githubpage`](../atb-game-to-githubpage/SKILL.md) or run `python3 skills/atb-game-to-githubpage/scripts/deploy.py --target target/<game_name>`.

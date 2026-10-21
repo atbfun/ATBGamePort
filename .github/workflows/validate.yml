@@ -29,8 +29,13 @@ jobs:
       - name: Run Repository Contract Checks
         run: npm run check
 
-      - name: Verify Headless Verifier Script Compilation & CLI
+      - name: Verify Python Script Compilation & CLI
         run: |
           python3 -m py_compile skills/atb-game-porting/scripts/verify-headless.py
           python3 skills/atb-game-porting/scripts/verify-headless.py --help
+          python3 -m py_compile skills/atb-game-package/scripts/package-game.py
+          python3 skills/atb-game-package/scripts/package-game.py --help
+          python3 -m py_compile skills/atb-game-to-githubpage/scripts/deploy.py
+          python3 skills/atb-game-to-githubpage/scripts/deploy.py --help
+          python3 -m unittest discover tests
           ./scripts/list-skills.sh

@@ -43,6 +43,9 @@ Step 1 creates a `target/<game>/web/assets -> ../assets` symlink, and the asset/
 **Can I package the finished port into an offline standalone file?**
 Yes. Use the companion skill `atb-game-package` (see [`docs/atb-game-package.md`](./atb-game-package.md)) or run `python3 skills/atb-game-package/scripts/package-game.py --input-dir target/<game>` to bundle the port into a single offline `<game>-standalone.html` file with embedded VFS or a portable folder with native double-click launchers.
 
+**Can I publish the finished port directly to GitHub Pages?**
+Yes. Use the companion skill `atb-game-to-githubpage` (see [`docs/atb-game-to-githubpage.md`](./atb-game-to-githubpage.md)) or run `python3 skills/atb-game-to-githubpage/scripts/deploy.py --target target/<game>` to dereference asset symlinks, audit subpath URLs, and set up automated GitHub Actions deployment.
+
 **Why is there a hard 1,000-line limit per file edit call?**
 Generating multi-thousand-line HTML5 Canvas engines in a single tool call frequently triggers model output truncation or infinite retry loops. Writing the structural skeleton first and filling in modules incrementally keeps every tool call deterministic and reviewable.
 

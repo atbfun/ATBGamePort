@@ -59,6 +59,9 @@ The packager inlines all binary and text assets into Base64 entries inside a vir
 **Why doesn't drawing images onto `<canvas>` throw a Tainted Canvas `SecurityError`?**  
 When images are loaded from external files under `file:///`, browsers treat them as cross-origin and taint the canvas context. The `__ATB_VFS__` shim rewrites image `src` assignments into Base64 Data URIs (`data:image/png;base64,...`). Under modern browser security rules, same-origin Data URIs do not taint the canvas, allowing `ctx.getImageData()` to run safely.
 
+**How does this compare to `atb-game-to-githubpage`?**  
+`atb-game-package` produces offline standalone bundles and local desktop launchers for distributing directly to players without any hosting. In contrast, `atb-game-to-githubpage` (see [`docs/atb-game-to-githubpage.md`](./atb-game-to-githubpage.md)) publishes games to the public web via GitHub Pages and automated GitHub Actions.
+
 **How does `Play-Windows.bat` run without Python or Node.js installed?**  
 It uses Windows PowerShell's built-in `.NET System.Net.HttpListener` class, which has been part of standard Windows since Windows 7. It creates a local HTTP server bound to loopback `127.0.0.1` and opens the default browser without any third-party dependencies.
 

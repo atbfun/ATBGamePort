@@ -1,0 +1,3 @@
+interface:
+  display_name: "ATB Game to GitHub Pages"
+  short_description: "Automated GitHub Pages deployment toolchain for HTML5/Canvas/WebGL games with symlink resolution and subpath routing"

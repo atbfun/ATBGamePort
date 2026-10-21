@@ -173,6 +173,11 @@ We built `atb-game-porting` to eliminate the four recurring failure modes that p
   - [`scripts/package-game.py`](./skills/atb-game-package/scripts/package-game.py): Pure Python 3 standard library offline bundler and launcher generator.
   - [`scripts/verify-package.py`](./skills/atb-game-package/scripts/verify-package.py): Automated headless Chrome zero-error and $\ge 90\%$ colored pixel ratio verifier for direct `file:///` URLs.
 
+- **[atb-game-to-githubpage](./skills/atb-game-to-githubpage/SKILL.md)** ([docs](./docs/atb-game-to-githubpage.md)): Zero-pollution GitHub Pages deployment toolchain for Web/HTML5 Canvas games, automatically dereferencing asset symlinks, auditing subpath routing, injecting `.nojekyll`, and configuring official GitHub Actions workflows.
+  - [`SYMLINKS-AND-SUBPATHS.md`](./skills/atb-game-to-githubpage/SYMLINKS-AND-SUBPATHS.md): Cross-directory asset symlink dereferencing, subpath routing rules, and `.nojekyll` Jekyll bypass specification.
+  - [`WORKFLOW-AND-PAGES.md`](./skills/atb-game-to-githubpage/WORKFLOW-AND-PAGES.md): Official Pages GitHub Actions workflow architecture, OIDC permissions, custom domain CNAME support, and repository Settings setup.
+  - [`scripts/deploy.py`](./skills/atb-game-to-githubpage/scripts/deploy.py): Pure Python 3 standard library one-click deployment scanner, staging verifier, and workflow generator.
+
 ---
 
 ## Repository Governance

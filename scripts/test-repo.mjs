@@ -58,7 +58,20 @@ function testTargetReadmeProvenanceSpecExists() {
   );
 }
 
+function testDeployPagesWorkflowAndTemplateExists() {
+  const template = readFileSync(
+    join(repo, "skills/atb-game-to-githubpage/templates/deploy-pages.yml.template"),
+    "utf8",
+  );
+  assert.ok(
+    template.includes("actions/upload-pages-artifact") &&
+      template.includes("actions/deploy-pages"),
+    "deploy-pages.yml.template must use official GitHub Actions Pages upload and deploy actions",
+  );
+}
+
 testVerifyHeadlessStderrLoggingAndStageHook();
 testValidateSkillsChecksReadmeRelativeLinks();
 testTargetReadmeProvenanceSpecExists();
-console.log("3/3 repository tests passed!");
+testDeployPagesWorkflowAndTemplateExists();
+console.log("4/4 repository tests passed!");

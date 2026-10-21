@@ -20,6 +20,7 @@
   ],
   "skills": [
     "./skills/atb-game-porting",
-    "./skills/atb-game-package"
+    "./skills/atb-game-package",
+    "./skills/atb-game-to-githubpage"
   ]
 }
