@@ -1,0 +1,3 @@
+interface:
+  display_name: "ATB Game Porting"
+  short_description: "Reverse-engineer and port classic games to zero-dependency HTML5 Canvas"
