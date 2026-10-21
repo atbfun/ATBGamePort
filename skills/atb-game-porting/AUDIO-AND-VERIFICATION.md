@@ -22,9 +22,10 @@ python3 <path-to-skill>/scripts/verify-headless.py \
 ### Mandatory Verification Gates:
 1. **Zero Console Errors & Uncaught Exceptions**: Headless Chrome DevTools log must show `0` `console.error` calls, `0` uncaught `DOMException` / `ReferenceError` / `TypeError` failures, and `0` failed critical script loads.
 2. **Three-Stage Pixel Snapshots ($\ge 90\%$ Colored Pixel Ratio)**:
-   - `screen_initial.png`: Initial load state (live Level 1 canvas visible beneath or after the start overlay);
-   - `screen_gameplay.png`: Active gameplay state (simulated pointer movement/clicks firing projectiles, active HUD);
-   - `screen_stage2.png`: Level progression / stage transition state;
+   - Support the `?atb_verify_stage=initial|gameplay|stage2` URL query parameter in `index.html` (`new URLSearchParams(location.search).get("atb_verify_stage")`) so headless CLI verification can deterministically render each stage:
+   - `screen_initial.png` (`?atb_verify_stage=initial`): Initial load state (live Level 1 canvas visible beneath or after the start overlay);
+   - `screen_gameplay.png` (`?atb_verify_stage=gameplay`): Active gameplay state (start overlay dismissed, active projectiles/entities and HUD);
+   - `screen_stage2.png` (`?atb_verify_stage=stage2`): Level 2 progression / stage transition state;
    - Every captured snapshot must have a non-black/colored pixel ratio $\ge 90\%$ (`0.90`).
 3. **Functional Matrix Check**:
    - Verify 6-language runtime hot-switching (`en`, `zh-CN`, `ja`, `fr`, `de`, `es`);

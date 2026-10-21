@@ -136,6 +136,7 @@ if (plugin && Array.isArray(plugin.skills)) {
         if (!docContent.includes(skillName)) {
           errors.push(`${docFile} does not reference skill "${skillName}"`);
         }
+        checkRelativeLinks(fullDoc, docFile);
       }
     }
   }

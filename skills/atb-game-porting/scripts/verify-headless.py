@@ -196,6 +196,7 @@ def capture_snapshot(
             "--no-first-run",
             "--no-default-browser-check",
             "--mute-audio",
+            "--enable-logging=stderr",
             f"--user-data-dir={user_data_dir}",
             f"--window-size={window_size[0]},{window_size[1]}",
             f"--virtual-time-budget={virtual_time_budget_ms}",

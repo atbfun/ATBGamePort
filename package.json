@@ -12,7 +12,7 @@
     "changeset": "changeset",
     "version": "changeset version && node scripts/sync-plugin-version.mjs",
     "check-plugin-version": "node scripts/sync-plugin-version.mjs --check",
-    "validate": "node scripts/validate-skills.mjs",
+    "validate": "node scripts/validate-skills.mjs && node scripts/test-repo.mjs",
     "check": "npm run check-plugin-version && npm run validate"
   },
   "devDependencies": {
