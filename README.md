@@ -1,6 +1,5 @@
 # ATBGamePort — Industrial-Grade Game Porting Skills
 
-[![skills.sh](https://www.skills.sh/p/VoswC8My6zgey2MK)](https://www.skills.sh/p/VoswC8My6zgey2MK)
 [![Powered by fun.aitobox.com](https://img.shields.io/badge/Powered_by-fun.aitobox.com-0ea5e9)](https://fun.aitobox.com)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](./LICENSE)
 
