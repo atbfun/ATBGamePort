@@ -1,0 +1,3 @@
+interface:
+  display_name: "ATB Game Package"
+  short_description: "Zero-dependency offline packager for HTML5 games with standalone HTML and native launchers"
