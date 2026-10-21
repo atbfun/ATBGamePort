@@ -113,11 +113,79 @@ Links `skills/atb-game-porting` directly into `~/.claude/skills` and `~/.agents/
 
 </details>
 
-### 3. Drop a game into `source/<game_name>/` and start porting
+---
 
-Place your original game bundle under `source/<game_name>/` and tell your agent:
+## End-to-End Walkthrough: Porting & Publishing a Game
 
-> Port `source/<game_name>` to HTML5 using `atb-game-porting`.
+Here is a complete real-world example porting, publishing, and packaging a game named `gameA`:
+
+### 1. Place the original game in `source/gameA`
+Place your classic desktop game assets, executables (`.exe`), media, and data files into:
+```text
+source/gameA/
+├── game.exe
+├── images/
+├── sounds/
+└── levels/
+```
+
+### 2. Port the game with `atb-game-porting`
+Tell your AI coding assistant:
+> Port `source/gameA` to HTML5 using `atb-game-porting`.
+
+The skill ([`atb-game-porting`](./skills/atb-game-porting/SKILL.md)) runs static binary reverse engineering, 32-bit alpha asset composition, 6-language i18n, storage persistence, and zero-black-screen Canvas implementation, outputting a fully verified web port to `target/gameA/`:
+```text
+target/gameA/
+├── analysis/reverse_engineering_report.md
+├── assets/
+├── src/
+├── web/
+│   ├── index.html
+│   └── assets -> ../assets (symlink)
+└── README.md
+```
+
+### 3. Create a GitHub repository `gameA` and put the port in the root
+Create a new GitHub repository (e.g. `https://github.com/<your-username>/gameA`) and place the contents of `target/gameA/` into its root directory:
+```bash
+cd target/gameA
+git init
+git remote add origin https://github.com/<your-username>/gameA.git
+git add .
+git commit -m "feat: initial game port"
+git push -u origin main
+```
+
+### 4. Enable GitHub Pages on repository `gameA`
+In your repository on GitHub:
+- Go to **Settings** -> **Pages**
+- Under **Build and deployment** -> **Source**, select **GitHub Actions** (not "Deploy from a branch")
+
+### 5. Deploy with `atb-game-to-githubpage`
+Tell your agent:
+> Deploy this game to GitHub Pages using `atb-game-to-githubpage`.
+
+Or run the deployment CLI ([`atb-game-to-githubpage`](./skills/atb-game-to-githubpage/SKILL.md)) directly inside the game repository:
+```bash
+python3 /path/to/ATBGamePort/skills/atb-game-to-githubpage/scripts/deploy.py --target . --commit --push
+```
+The skill automatically dereferences asset symlinks, audits relative asset paths, injects `.nojekyll`, and pushes `.github/workflows/deploy-pages.yml`.
+
+### 6. Play online via GitHub Pages
+Once the GitHub Actions workflow finishes (~30 seconds), visit your game at:
+```text
+https://<your-username>.github.io/gameA/
+```
+Enjoy zero-delay Web Audio sound, responsive touch/mouse controls, and cross-device save persistence directly in your browser!
+
+### 7. Optional: Offline Click-to-Play with `atb-game-package`
+If you want a standalone offline build that players can double-click locally without any web server:
+> Package `target/gameA` using `atb-game-package`.
+
+```bash
+python3 /path/to/ATBGamePort/skills/atb-game-package/scripts/package-game.py --input-dir target/gameA --out-dir target/gameA/dist
+```
+The skill ([`atb-game-package`](./skills/atb-game-package/SKILL.md)) generates `gameA-standalone.html` (single-file bundle with in-browser VFS eliminating all CORS/Canvas tainting) and `gameA-portable/` with native double-click launchers (`Play-macOS.command` and `Play-Windows.bat`).
 
 ---
 

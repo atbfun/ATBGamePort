@@ -113,11 +113,79 @@ cd ATBGamePort
 
 </details>
 
-### 3. 放入原始游戏并启动移植
+---
 
-将待移植的桌面游戏目录放入工作区的 `source/<game_name>/` 下，直接对 Agent 说：
+## 端到端实战指引：从原始游戏到在线发布游玩（Example Walkthrough）
 
-> 使用 `atb-game-porting` 将 `source/<game_name>` 移植为 HTML5 游戏。
+以经典小游戏 `gameA` 为例，完整的工作流只需以下几步：
+
+### 1. 存放原始游戏到 `source/gameA`
+将原始经典桌面游戏程序（`.exe`、`.dll`）、素材（图片、音效）及关卡配置放入：
+```text
+source/gameA/
+├── game.exe
+├── images/
+├── sounds/
+└── levels/
+```
+
+### 2. 使用 `atb-game-porting` 生成移植版本
+对你的 AI 助手说：
+> 使用 `atb-game-porting` 将 `source/gameA` 移植为 HTML5 游戏。
+
+该技能（[`atb-game-porting`](./skills/atb-game-porting/SKILL.md)）将全自动执行二进制逆向分析、RGB+Alpha 透明素材合成、6 国语言国际化、跨端存档与零黑屏防御 Canvas 渲染，最终在 `target/gameA/` 生成完整且经过自动化无头像素验证的网页游戏：
+```text
+target/gameA/
+├── analysis/reverse_engineering_report.md
+├── assets/
+├── src/
+├── web/
+│   ├── index.html
+│   └── assets -> ../assets (软链接)
+└── README.md
+```
+
+### 3. 新建 GitHub 仓库 `gameA` 并放入根目录
+在 GitHub 上新建仓库（例如 `https://github.com/<your-username>/gameA`），并将 `target/gameA/` 中的移植内容放置于该仓库根目录并提交：
+```bash
+cd target/gameA
+git init
+git remote add origin https://github.com/<your-username>/gameA.git
+git add .
+git commit -m "feat: initial game port"
+git push -u origin main
+```
+
+### 4. 开启 GitHub 仓库的 Pages 功能
+打开 GitHub 仓库页面：
+- 进入 **Settings** -> **Pages**
+- 在 **Build and deployment** -> **Source** 下拉框中，选择 **GitHub Actions**（而非从分支部署）
+
+### 5. 使用 `atb-game-to-githubpage` 一键部署
+对 AI 助手说：
+> 使用 `atb-game-to-githubpage` 把当前游戏部署到 GitHub Pages。
+
+或在游戏仓库根目录下直接运行部署脚本（[`atb-game-to-githubpage`](./skills/atb-game-to-githubpage/SKILL.md)）：
+```bash
+python3 /path/to/ATBGamePort/skills/atb-game-to-githubpage/scripts/deploy.py --target . --commit --push
+```
+该技能会自动穿透并实体化跨目录素材软链接、检查二级子路径（`/gameA/`）相对引用、注入 `.nojekyll` 并推送 `.github/workflows/deploy-pages.yml` 工作流。
+
+### 6. 访问 GitHub Pages URL 在线游玩
+等待 GitHub Actions 流水线执行完毕（约 30 秒）后，即可在浏览器直接游玩：
+```text
+https://<your-username>.github.io/gameA/
+```
+享受零延迟 Web Audio 音效、自适应触控/鼠标交互及跨设备存档持久化！
+
+### 7. 可选：使用 `atb-game-package` 生成离线单文件/便携包
+如果你希望把游戏分发给没有服务器环境的玩家双击即玩，可以直接打包（[`atb-game-package`](./skills/atb-game-package/SKILL.md)）：
+> 使用 `atb-game-package` 打包 `target/gameA`。
+
+```bash
+python3 /path/to/ATBGamePort/skills/atb-game-package/scripts/package-game.py --input-dir target/gameA --out-dir target/gameA/dist
+```
+生成内嵌 VFS 消除所有 CORS/Canvas 污染的 `gameA-standalone.html`（双击即可在任何浏览器游玩），以及带有原生双击启动器（macOS `.command`、Windows `.bat`）的 `gameA-portable/` 便携分发包。
 
 ---
 
