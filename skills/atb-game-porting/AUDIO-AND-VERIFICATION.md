@@ -27,11 +27,12 @@ python3 <path-to-skill>/scripts/verify-headless.py \
    - `screen_gameplay.png` (`?atb_verify_stage=gameplay`): Active gameplay state (start overlay dismissed, active projectiles/entities and HUD);
    - `screen_stage2.png` (`?atb_verify_stage=stage2`): Level 2 progression / stage transition state;
    - Every captured snapshot must have a non-black/colored pixel ratio $\ge 90\%$ (`0.90`).
-3. **Functional Matrix Check**:
+3. **Functional Matrix & Documentation Check**:
    - Verify 6-language runtime hot-switching (`en`, `zh-CN`, `ja`, `fr`, `de`, `es`);
    - Verify `localStorage` persistence across page reload and JSON Save Export/Import round-trip restoration;
    - Verify desktop (`1280x800`) and mobile (`390x844` iPhone viewport) responsive layout without overflow;
-   - Verify `fun.aitobox.com` console banner and UI easter egg trigger.
+   - Verify `fun.aitobox.com` console banner and UI easter egg trigger;
+   - Verify `target/<game_name>/README.md` exists and contains complete Original Game Profile (title, developer, genre, scale), Porting Provenance (driving AI Model, harness, date), and Web technical specifications per `MIGRATE-TEMPLATE.md`.
 
 ## 3. Phase 7: Mandatory `grill-with-docs` Self-Inspection Loop
 Once the initial `MIGRATE.md` and full codebase implementation are complete:

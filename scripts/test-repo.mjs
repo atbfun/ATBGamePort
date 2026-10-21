@@ -34,6 +34,31 @@ function testValidateSkillsChecksReadmeRelativeLinks() {
   );
 }
 
+function testTargetReadmeProvenanceSpecExists() {
+  const migrateTemplate = readFileSync(
+    join(repo, "skills/atb-game-porting/MIGRATE-TEMPLATE.md"),
+    "utf8",
+  );
+  assert.ok(
+    migrateTemplate.includes("Original Game Profile") &&
+      migrateTemplate.includes("Porting Provenance") &&
+      migrateTemplate.includes("AI Model"),
+    "MIGRATE-TEMPLATE.md must specify target/<game>/README.md with Original Game Profile, Porting Provenance, and AI Model",
+  );
+
+  const audioVerify = readFileSync(
+    join(repo, "skills/atb-game-porting/AUDIO-AND-VERIFICATION.md"),
+    "utf8",
+  );
+  assert.ok(
+    audioVerify.includes("target/<game_name>/README.md") &&
+      audioVerify.includes("AI Model") &&
+      audioVerify.includes("Original Game Profile"),
+    "AUDIO-AND-VERIFICATION.md must require checking target/<game_name>/README.md with AI Model and Original Game Profile",
+  );
+}
+
 testVerifyHeadlessStderrLoggingAndStageHook();
 testValidateSkillsChecksReadmeRelativeLinks();
-console.log("2/2 repository tests passed!");
+testTargetReadmeProvenanceSpecExists();
+console.log("3/3 repository tests passed!");

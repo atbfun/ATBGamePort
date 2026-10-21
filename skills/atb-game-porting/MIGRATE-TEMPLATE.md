@@ -57,7 +57,7 @@ When creating `source/<game_name>/MIGRATE.md` for a new game, use the template b
 - [ ] **5.3 Audio Lazy Loading & Autoplay Unlock**: Prevent connection pool exhaustion by lazy loading audio assets on demand and unlocking upon first user interaction.
 
 ### Phase 6: Engineering Delivery & Automated Verification
-- [ ] **6.1 Project Code Archiving**: Organize `src/` (C++ simulation engine) and `web/` (instant-play HTML5 Canvas).
+- [ ] **6.1 Project Code Archiving & Porting Provenance README**: Organize `src/` (C++ simulation engine) and `web/` (instant-play HTML5 Canvas), and author `target/<game_name>/README.md` documenting Original Game Profile (title, developer, genre, scale/assets), Porting Provenance (driving AI Model, Agent Harness & RE tools, date, skill version), and Web technical specifications.
 - [ ] **6.2 Cross-Protocol & Browser Compatibility**: Verify stability across HTTP hosting and direct offline `file://` double-clicking.
 - [ ] **6.3 Performance & Hand-Feel Benchmarking**: Ensure locked 60 FPS, automatic multi-level progression, and gameplay physics fidelity matching the original.
 - [ ] **6.4 Automated Headless Browser Snapshot & Pixel Ratio Verification**: Run `verify-headless.py` capturing initial, gameplay, and stage transition snapshots, confirming 0 console errors and canvas colored pixel ratio >= 90%.
@@ -81,7 +81,7 @@ Ported projects under `target/<game_name>/` must maintain the following layout:
 ```text
 target/<game_name>/
 ├── CMakeLists.txt              # C++ simulation build configuration (optional but recommended)
-├── README.md                   # Standalone technical guide and execution instructions
+├── README.md                   # Standalone porting documentation & technical guide (see template below)
 ├── analysis/                   # Reverse engineering analysis reports
 │   └── reverse_engineering_report.md
 ├── assets/                     # Reconstructed full asset library (32-bit PNGs, transcoded audio, configs)
@@ -89,4 +89,42 @@ target/<game_name>/
 └── web/                        # Instant-play HTML5 entrypoint
     ├── assets -> ../assets     # Symbolic link for HTTP & file:/// dual compatibility
     └── index.html              # Pure native Canvas single-entry or modular implementation
+```
+
+### Standard `target/<game_name>/README.md` Format Template
+
+Every ported game must provide a complete `target/<game_name>/README.md` documenting:
+
+```markdown
+# <Game Name> — HTML5 Web Port
+
+> Ported with \`atb-game-porting\` | Powered by [fun.aitobox.com](https://fun.aitobox.com)
+
+## 1. 原始游戏信息 (Original Game Profile)
+- **游戏名称**: <Game Name> (Original Title / Aliases)
+- **开发与发行商**: <Original Developer / Publisher> (<Release Year>)
+- **原始平台与架构**: Windows PE MSVC C++ / PopCap SexyAppFramework / Flash / DirectX / etc.
+- **原始规模与体积**:
+  - 核心执行体体积 (e.g., \`game.exe\`, 2.4 MB)
+  - 资源规模 (e.g., 180+ 贴图 / 45 独立音频 / 12 关卡轨道文件)
+  - 原始音频格式 (e.g., MO3 / MOD / MIDI 模块音乐, WAV 音效)
+
+## 2. 移植归属与 AI 模型信息 (Porting Provenance)
+- **驱动模型 (AI Model)**: <Primary Model Name, e.g., Gemini 4, Claude 3.7 Sonnet, Claude 3.5 Sonnet, Sol6, etc.>
+- **开发工具链 (Agent Harness & RE Tools)**: <Agent Runner e.g. Antigravity / Claude Code / Codex> + REA (reverse-engineer-anything) + Hopper Disassembler
+- **执行技能版本 (Skill Version)**: \`atb-game-porting v1.0.0\`
+- **移植完成时间**: YYYY-MM-DD
+- **平台背书**: [fun.aitobox.com](https://fun.aitobox.com)
+
+## 3. 网页版技术规格与特性 (Web Architecture & Features)
+- **运行方式**: 纯原生 HTML5 Canvas (60 FPS)，**零外部第三方 JS 库依赖**
+- **音效矩阵**: 双模 Web Audio API (HTTP 混音) + HTML5 Audio / 合成器音效降级 (\`file:///\` 离线双击)
+- **多语言支持**: 6 国语言即时热切换 (\`en\` / \`zh-CN\` / \`ja\` / \`fr\` / \`de\` / \`es\`)
+- **存档与跨端同步**: \`StorageManager\` 命名空间隔离 (\`atb_<game>_*\`) + 一键 JSON 存档导出/导入
+- **多端响应式**: \`100dvh\` + 安全区 Notch 适配 + >= 44px 触控虚拟按键
+- **平台彩蛋**: 控制台 Banner 与游戏内关于面板点击彩蛋 (跳转 \`fun.aitobox.com\`)
+
+## 4. 快速运行与验证指南 (Quick Start)
+- 本地启动方式 (HTTP 服务或直接双击 \`web/index.html\`)
+- 自动化 Headless Chrome 像素验证指令 (\`verify-headless.py\`)
 ```

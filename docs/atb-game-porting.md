@@ -29,7 +29,7 @@ The skill keeps its top-level `SKILL.md` compact and discloses phase-specific ru
 | **Phase 2: Assets & i18n** | [`ASSETS-AND-I18N.md`](https://github.com/atbfun/ATBGamePort/blob/main/skills/atb-game-porting/ASSETS-AND-I18N.md) | Composites 32-bit RGBA PNGs, transcodes tracker audio, and builds 1:1 original or 6-language (`en`/`zh-CN`/`ja`/`fr`/`de`/`es`) dictionaries |
 | **Phase 3: Gameplay & Storage** | [`GAMEPLAY-AND-STORAGE.md`](https://github.com/atbfun/ATBGamePort/blob/main/skills/atb-game-porting/GAMEPLAY-AND-STORAGE.md) | Rebuilds physics, `StorageManager` (`atb_<game>_*`), JSON Save Export/Import, and normalized touch input |
 | **Phase 4: Canvas & UI** | [`CANVAS-AND-UI.md`](https://github.com/atbfun/ATBGamePort/blob/main/skills/atb-game-porting/CANVAS-AND-UI.md) | Enforces the **Zero-Black-Screen Guard**, `100dvh` safe-area responsive layout, and `fun.aitobox.com` easter eggs |
-| **Phase 5 & 6: Audio & Verify** | [`AUDIO-AND-VERIFICATION.md`](https://github.com/atbfun/ATBGamePort/blob/main/skills/atb-game-porting/AUDIO-AND-VERIFICATION.md) | Implements the **Dual-Mode Audio Matrix** and runs `scripts/verify-headless.py` ($\ge 90\%$ colored pixels, `0` console errors) |
+| **Phase 5 & 6: Audio & Verify** | [`AUDIO-AND-VERIFICATION.md`](https://github.com/atbfun/ATBGamePort/blob/main/skills/atb-game-porting/AUDIO-AND-VERIFICATION.md) | Implements the **Dual-Mode Audio Matrix**, authors `target/<game>/README.md` (Original Game Profile & AI Model Provenance), and runs `scripts/verify-headless.py` ($\ge 90\%$ colored pixels, `0` console errors) |
 | **Phase 7: Self-Check Loop** | `grill-with-docs` | Audits edge cases, unconditionally adopts all recommended options, and re-verifies in-place |
 
 ## Common questions
