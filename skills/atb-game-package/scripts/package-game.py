@@ -177,7 +177,8 @@ def gather_vfs_assets(layout: GameLayout) -> Dict[str, dict]:
                 process_file(p, resolved_adir, key_prefix=prefix)
 
     # 2. Scan web directory for other static assets (png, jpg, mp3, json, etc.)
-    for root, _, files in os.walk(layout.web_dir.resolve()):
+    for root, dirs, files in os.walk(layout.web_dir.resolve()):
+        dirs[:] = [d for d in dirs if d != "dist" and not d.startswith(".")]
         for f in sorted(files):
             if f.startswith(".") or f.endswith(".html"):
                 continue
@@ -198,7 +199,7 @@ def build_vfs_shim_js(vfs_data: Dict[str, dict]) -> str:
     var s = String(url).split("?")[0].split("#")[0];
     try {{ s = decodeURIComponent(s); }} catch (e) {{}}
     s = s.replace(/\\\\/g, "/");
-    s = s.replace(/^[a-zA-Z]+:\\/\\/[^/]+\\//, "");
+    s = s.replace(/^[a-zA-Z]+:\\/\\/[^/]*\\//, "");
     s = s.replace(/^(\\.\\.\\/|\\.\\/)+/, "");
     s = s.replace(/^\\/+/, "");
     return s;
@@ -228,7 +229,7 @@ def build_vfs_shim_js(vfs_data: Dict[str, dict]) -> str:
   // 1. Intercept window.fetch
   var originalFetch = window.fetch;
   window.fetch = function(input, init) {{
-    var url = typeof input === "string" ? input : (input && input.url ? input.url : "");
+    var url = typeof input === "string" ? input : (input && input.url ? input.url : (input && input.href ? input.href : String(input || "")));
     var entry = getVfsEntry(url);
     if (entry) {{
       var bytes = b64ToUint8(entry.b64);
@@ -269,9 +270,13 @@ def build_vfs_shim_js(vfs_data: Dict[str, dict]) -> str:
           if (xhr.responseType === "blob") {{
             respData = new Blob([bytes], {{ type: mime }});
           }} else if (xhr.responseType === "text" || !xhr.responseType) {{
-            var str = "";
-            for (var j = 0; j < bytes.length; j++) {{ str += String.fromCharCode(bytes[j]); }}
-            try {{ respData = decodeURIComponent(escape(str)); }} catch (e) {{ respData = str; }}
+            try {{
+              respData = new TextDecoder("utf-8").decode(bytes);
+            }} catch (e) {{
+              var str = "";
+              for (var j = 0; j < bytes.length; j++) {{ str += String.fromCharCode(bytes[j]); }}
+              respData = str;
+            }}
             Object.defineProperty(xhr, "responseText", {{ value: respData, writable: true }});
           }} else if (xhr.responseType === "json") {{
             var dec = new TextDecoder("utf-8").decode(bytes);
@@ -291,6 +296,11 @@ def build_vfs_shim_js(vfs_data: Dict[str, dict]) -> str:
     return xhr;
   }}
   PatchedXHR.prototype = OriginalXHR.prototype;
+  for (var prop in OriginalXHR) {{
+    if (Object.prototype.hasOwnProperty.call(OriginalXHR, prop)) {{
+      PatchedXHR[prop] = OriginalXHR[prop];
+    }}
+  }}
   window.XMLHttpRequest = PatchedXHR;
 
   // 3. Intercept Image src & Element.setAttribute
@@ -377,16 +387,20 @@ def build_standalone_html(layout: GameLayout, vfs: Dict[str, dict], out_file: Pa
 
     # 1. Inline CSS stylesheets
     def replace_css_link(match: re.Match) -> str:
-        href = match.group(1).strip("'\"")
-        css_path = (layout.web_dir / href).resolve()
-        if css_path.is_file():
-            css_content = css_path.read_text(encoding="utf-8")
-            inlined_css = inline_css_urls(css_content, vfs)
-            return f"<style>/* inlined {href} */\n{inlined_css}\n</style>"
-        return match.group(0)
+        full_tag = match.group(0)
+        rel_match = re.search(r'rel=["\']stylesheet["\']', full_tag, flags=re.IGNORECASE)
+        href_match = re.search(r'href=["\']([^"\']+)["\']', full_tag, flags=re.IGNORECASE)
+        if rel_match and href_match:
+            href = href_match.group(1).strip("'\"")
+            css_path = (layout.web_dir / href).resolve()
+            if css_path.is_file():
+                css_content = css_path.read_text(encoding="utf-8")
+                inlined_css = inline_css_urls(css_content, vfs)
+                return f"<style>/* inlined {href} */\n{inlined_css}\n</style>"
+        return full_tag
 
     html_transformed = re.sub(
-        r'<link\s+[^>]*rel=["\']stylesheet["\'][^>]*href=["\']([^"\']+)["\'][^>]*>',
+        r'<link\s+[^>]*>',
         replace_css_link,
         html_raw,
         flags=re.IGNORECASE,
@@ -404,8 +418,8 @@ def build_standalone_html(layout: GameLayout, vfs: Dict[str, dict], out_file: Pa
         js_path = (layout.web_dir / src).resolve()
         if js_path.is_file():
             js_content = js_path.read_text(encoding="utf-8")
-            # Escape </script> inside javascript to avoid early HTML parser termination
-            safe_js = js_content.replace("</script>", "<\\/script>")
+            # Escape </script> (case-insensitive) inside javascript to avoid early HTML parser termination
+            safe_js = re.sub(r'</script>', r'<\\/script>', js_content, flags=re.IGNORECASE)
             return f"<script>/* inlined {src} */\n{safe_js}\n</script>"
         return full_tag
 
@@ -552,17 +566,21 @@ How to play:
 
 def build_portable_bundle(layout: GameLayout, out_dir: Path) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
+    out_dir_resolved = out_dir.resolve()
 
-    # 1. Copy web directory contents with symlinks dereferenced (symlinks=False copies actual content)
+    # 1. Copy web directory contents with symlinks dereferenced
     for item in layout.web_dir.iterdir():
+        # Prevent infinite recursion if out_dir or dist is inside web_dir
+        if item.name == "dist" or item.resolve() == out_dir_resolved or item.name.startswith("."):
+            continue
         dest = out_dir / item.name
-        if item.is_dir() or item.is_symlink():
+        target = item.resolve()
+        if target.is_dir():
             if dest.exists():
                 shutil.rmtree(dest)
-            # copytree with symlinks=False dereferences symlinks into actual directories
-            shutil.copytree(item.resolve(), dest, symlinks=False)
-        elif item.is_file():
-            shutil.copy2(item, dest)
+            shutil.copytree(target, dest, symlinks=False)
+        elif target.is_file():
+            shutil.copy2(target, dest)
 
     # 2. Ensure assets directory exists in portable folder if root_dir/assets exists
     parent_assets = layout.root_dir / "assets"
@@ -590,7 +608,10 @@ def build_release_zip(standalone_html: Path, portable_dir: Path, out_zip: Path) 
     with zipfile.ZipFile(out_zip, "w", compression=zipfile.ZIP_DEFLATED) as zf:
         # Add standalone HTML at root of zip
         if standalone_html.is_file():
-            zf.write(standalone_html, arcname=standalone_html.name)
+            zinfo_html = zipfile.ZipInfo.from_file(standalone_html, arcname=standalone_html.name)
+            zinfo_html.create_system = 3
+            zinfo_html.external_attr = (0o100644 << 16) | 0o20
+            zf.writestr(zinfo_html, standalone_html.read_bytes())
 
         # Add portable folder with preserved permissions
         if portable_dir.is_dir():
@@ -599,6 +620,7 @@ def build_release_zip(standalone_html: Path, portable_dir: Path, out_zip: Path) 
                     full_p = Path(root) / f
                     arcname = (Path(portable_dir.name) / full_p.relative_to(portable_dir)).as_posix()
                     zinfo = zipfile.ZipInfo.from_file(full_p, arcname=arcname)
+                    zinfo.create_system = 3  # Explicit UNIX system for permission preservation
                     if f.endswith(".command") or f.endswith(".sh"):
                         # Set Unix permissions 0755
                         zinfo.external_attr = (0o100755 << 16) | 0o20

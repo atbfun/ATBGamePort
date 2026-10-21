@@ -190,8 +190,7 @@ def verify_standalone_file_url(
     min_colored_ratio: float = 0.90,
 ) -> List[str]:
     failures: List[str] = []
-    abs_path = html_file.resolve().as_posix()
-    base_file_url = f"file://{abs_path}"
+    base_file_url = html_file.resolve().as_uri()
 
     stages = [
         ("screen_file_initial.png", "?atb_verify_stage=initial", 2000),

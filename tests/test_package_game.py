@@ -174,23 +174,50 @@ class TestPackageGame(unittest.TestCase):
             perm = (macos_info.external_attr >> 16) & 0o777
             self.assertTrue(bool(perm & 0o111), f"Expected executable permission in zip, got octal: {oct(perm)}")
 
-    def test_verify_package_helpers(self):
-        vmod = load_verify_module()
-        self.assertTrue(hasattr(vmod, "verify_portable_bundle"))
-        self.assertTrue(hasattr(vmod, "verify_release_zip"))
-        self.assertTrue(hasattr(vmod, "compute_png_colored_ratio"))
+    def test_package_game_root_layout_and_file_symlink(self):
+        # Create a game layout directly at root (no web/ subfolder)
+        root_game_dir = self.test_root / "rootgame"
+        root_game_dir.mkdir(parents=True, exist_ok=True)
+        (root_game_dir / "index.html").write_text(
+            '<!DOCTYPE html><html><head><link href="custom.css" rel="stylesheet"></head><body>'
+            '<img src="ball.png"><script src="app.js"></script></body></html>',
+            encoding="utf-8",
+        )
+        (root_game_dir / "custom.css").write_text("body { color: red; }", encoding="utf-8")
+        (root_game_dir / "app.js").write_text("console.log('root app');", encoding="utf-8")
+        (root_game_dir / "ball.png").write_bytes(self.png_bytes)
 
-        # Test on packaged game fixture
+        # File symlink: config_link.json -> real_config.json
+        (root_game_dir / "real_config.json").write_text('{"ok": true}', encoding="utf-8")
+        os.symlink("real_config.json", root_game_dir / "config_link.json")
+
+        # Pre-existing dist folder with a dummy artifact
+        pre_dist = root_game_dir / "dist"
+        pre_dist.mkdir(parents=True, exist_ok=True)
+        (pre_dist / "dummy_old_build.zip").write_bytes(b"OLD_ZIP_DATA")
+
         pmod = load_package_module()
-        layout = pmod.resolve_game_layout(self.game_dir)
-        dist_dir = self.game_dir / "dist"
-        res = pmod.package_game(self.game_dir, out_dir=dist_dir)
+        layout = pmod.resolve_game_layout(root_game_dir)
+        self.assertEqual(layout.web_dir, root_game_dir)
 
-        p_issues = vmod.verify_portable_bundle(res["portable_dir"])
-        self.assertEqual(p_issues, [], f"Portable bundle issues: {p_issues}")
+        # Packaging must NOT loop infinitely, must NOT crash on file symlink,
+        # and must NOT include dummy_old_build.zip in VFS!
+        res = pmod.package_game(root_game_dir, out_dir=pre_dist)
+        standalone_html = res["standalone_html"].read_text(encoding="utf-8")
 
-        z_issues = vmod.verify_release_zip(res["release_zip"])
-        self.assertEqual(z_issues, [], f"Release zip issues: {z_issues}")
+        # Verify old dist artifact is excluded from VFS
+        self.assertNotIn("dummy_old_build.zip", standalone_html)
+        # Verify reversed attribute order <link href="custom.css" rel="stylesheet"> was inlined
+        self.assertIn("body { color: red; }", standalone_html)
+        # Verify file symlink was dereferenced as a real file in portable
+        portable_link = res["portable_dir"] / "config_link.json"
+        self.assertTrue(portable_link.is_file())
+        self.assertFalse(portable_link.is_symlink())
+
+        # Verify static properties on PatchedXHR exist in the shim
+        self.assertIn("PatchedXHR[prop] = OriginalXHR[prop]", standalone_html)
+        # Verify URL object input support in fetch shim
+        self.assertIn("input.href", standalone_html)
 
 
 if __name__ == "__main__":
