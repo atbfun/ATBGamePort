@@ -16,15 +16,18 @@
 
 通过插件（Plugin）安装可享受版本发布后的自动更新；通过 [skills.sh](https://skills.sh/atbfun/ATBGamePort) 安装则会将可编辑的技能文件复制到你的项目中。每个 Agent 请二选一，避免重复加载。
 
-### 1. 安装前置配套技能（Prerequisites）
+### 1. 安装前置依赖（Prerequisites）
 
-`atb-game-porting` 在 Phase 1（二进制逆向）与 Phase 7（架构自检）中协同调用以下两个配套技能：
+`atb-game-porting` 依赖 **Python 3**（用于私有二进制格式解析、RGB+Alpha 贴图合成及运行 `verify-headless.py` 自动化像素验收），并在 Phase 1（二进制逆向）与 Phase 7（架构自检）中协同调用两个配套技能：
 
 ```bash
-# 1. 安装 grill-with-docs（来自 mattpocock/skills），用于 Phase 7 自动化深度自检
+# 1. 确保已安装 Python 3（推荐 Python 3.10+）
+python3 --version
+
+# 2. 安装 grill-with-docs（来自 mattpocock/skills），用于 Phase 7 自动化深度自检
 npx skills@latest add mattpocock/skills --skill=grill-with-docs
 
-# 2. 确保你的 Agent 环境已启用 reverse-engineer-anything (REA) 技能与 MCP 服务
+# 3. 确保你的 Agent 环境已启用 reverse-engineer-anything (REA) 技能与 MCP 服务
 ```
 
 ### 2. 安装 `atb-game-porting`

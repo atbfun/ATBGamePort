@@ -16,15 +16,18 @@ Porting real games with AI is hard. Prompting an agent with *"build me a web clo
 
 A plugin updates itself automatically when new versions release. [skills.sh](https://skills.sh/atbfun/ATBGamePort) copies editable files into your project. Pick one route per agent so you don't install every skill twice.
 
-### 1. Install Prerequisites (Companion Skills)
+### 1. Install Prerequisites
 
-`atb-game-porting` coordinates with two companion skills for binary dissection and architectural self-inspection:
+`atb-game-porting` requires **Python 3** (for binary parsing, RGB+Alpha asset composition, and headless browser verification) and coordinates with two companion skills:
 
 ```bash
-# 1. Install grill-with-docs (from mattpocock/skills) for Phase 7 self-inspection
+# 1. Ensure Python 3 (3.10+ recommended) is installed
+python3 --version
+
+# 2. Install grill-with-docs (from mattpocock/skills) for Phase 7 self-inspection
 npx skills@latest add mattpocock/skills --skill=grill-with-docs
 
-# 2. Ensure the reverse-engineer-anything (REA) skill & MCP server are enabled in your agent
+# 3. Ensure the reverse-engineer-anything (REA) skill & MCP server are enabled in your agent
 ```
 
 ### 2. Install `atb-game-porting`

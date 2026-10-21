@@ -3,15 +3,18 @@
 Single source of truth for installation commands across `README.md` and `README.zh-CN.md`.
 A plugin updates itself when `.claude-plugin/plugin.json` `version` increments; `skills.sh` and `gemini skills install` copy editable files into your workspace. Pick one route per agent so skills are not installed twice.
 
-## 1. Prerequisites (Companion Skills)
+## 1. Prerequisites
 
 <canonical-block name="prerequisites">
 
 ```bash
-# 1. Install grill-with-docs (from mattpocock/skills) for Phase 7 self-inspection
+# 1. Ensure Python 3 (3.10+ recommended) is installed
+python3 --version
+
+# 2. Install grill-with-docs (from mattpocock/skills) for Phase 7 self-inspection
 npx skills@latest add mattpocock/skills --skill=grill-with-docs
 
-# 2. Ensure reverse-engineer-anything (REA) skill & MCP server are enabled in your agent
+# 3. Ensure reverse-engineer-anything (REA) skill & MCP server are enabled in your agent
 ```
 
 </canonical-block>
