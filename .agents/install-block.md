@@ -87,7 +87,7 @@ Re-run the command to update.
 <canonical-block name="other-agents">
 
 ```bash
-npx skills@latest add atbfun/ATBGamePort -a <agent>  # cursor, windsurf, opencode, devin, amp, pi; omit -a to choose
+npx skills@latest add https://skills.sh/p/VoswC8My6zgey2MK -a <agent>  # cursor, windsurf, opencode, devin, amp, pi; omit -a to choose
 ```
 
 To update, run `npx skills@latest update`.

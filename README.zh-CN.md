@@ -1,6 +1,6 @@
 # ATBGamePort — 工业级小游戏逆向与 HTML5 移植技能库
 
-[![skills.sh](https://skills.sh/b/atbfun/ATBGamePort)](https://skills.sh/atbfun/ATBGamePort)
+[![skills.sh](https://img.shields.io/badge/skills.sh-VoswC8My6zgey2MK-0ea5e9)](https://www.skills.sh/p/VoswC8My6zgey2MK)
 [![Powered by fun.aitobox.com](https://img.shields.io/badge/Powered_by-fun.aitobox.com-0ea5e9)](https://fun.aitobox.com)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](./LICENSE)
 
@@ -14,7 +14,7 @@
 
 ## 快速安装（30 秒上手）
 
-通过插件（Plugin）安装可享受版本发布后的自动更新；通过 [skills.sh](https://skills.sh/atbfun/ATBGamePort) 安装则会将可编辑的技能文件复制到你的项目中。每个 Agent 请二选一，避免重复加载。
+通过插件（Plugin）安装可享受版本发布后的自动更新；通过 [skills.sh](https://www.skills.sh/p/VoswC8My6zgey2MK) 安装则会将可编辑的技能文件复制到你的项目中。每个 Agent 请二选一，避免重复加载。
 
 ### 1. 安装前置依赖（Prerequisites）
 
@@ -93,7 +93,7 @@ gemini skills install https://github.com/atbfun/ATBGamePort.git --path skills
 <summary><strong>其他 Agent 或可编辑文件安装</strong>（Cursor / Windsurf / OpenCode / Antigravity 等）</summary>
 
 ```bash
-npx skills@latest add atbfun/ATBGamePort -a <agent>  # cursor, windsurf, opencode, devin, amp, pi；省略 -a 可交互选择
+npx skills@latest add https://skills.sh/p/VoswC8My6zgey2MK -a <agent>  # cursor, windsurf, opencode, devin, amp, pi；省略 -a 可交互选择
 ```
 
 更新时运行 `npx skills@latest update`。

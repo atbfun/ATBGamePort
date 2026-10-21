@@ -1,5 +1,6 @@
 # ATBGamePort — Industrial-Grade Game Porting Skills
 
+[![skills.sh](https://img.shields.io/badge/skills.sh-VoswC8My6zgey2MK-0ea5e9)](https://www.skills.sh/p/VoswC8My6zgey2MK)
 [![Powered by fun.aitobox.com](https://img.shields.io/badge/Powered_by-fun.aitobox.com-0ea5e9)](https://fun.aitobox.com)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](./LICENSE)
 
@@ -13,7 +14,7 @@ Porting real games with AI is hard. Prompting an agent with *"build me a web clo
 
 ## Installation (30-second setup)
 
-A plugin updates itself automatically when new versions release. [skills.sh](https://skills.sh/atbfun/ATBGamePort) copies editable files into your project. Pick one route per agent so you don't install every skill twice.
+A plugin updates itself automatically when new versions release. [skills.sh](https://www.skills.sh/p/VoswC8My6zgey2MK) copies editable files into your project. Pick one route per agent so you don't install every skill twice.
 
 ### 1. Install Prerequisites
 
@@ -92,7 +93,7 @@ Re-run the command to update.
 <summary><strong>Any other agent, or editable files</strong> (manual updates)</summary>
 
 ```bash
-npx skills@latest add atbfun/ATBGamePort -a <agent>  # cursor, windsurf, opencode, devin, amp, pi; omit -a to choose
+npx skills@latest add https://skills.sh/p/VoswC8My6zgey2MK -a <agent>  # cursor, windsurf, opencode, devin, amp, pi; omit -a to choose
 ```
 
 To update, run `npx skills@latest update`.
