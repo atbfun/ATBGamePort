@@ -1,0 +1,46 @@
+name: Bug Report (Observed Porting Failure)
+description: Report a failure observed during a real game porting session
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Per [`SCOPE.md`](../SCOPE.md), every bug report must describe an **observed failure** from a real porting session.
+  - type: input
+    id: game-architecture
+    attributes:
+      label: Target Game & Engine Architecture
+      description: What kind of game binary/bundle was in `source/<game>/`?
+      placeholder: "e.g., PopCap SexyAppFramework Windows PE (.exe), MSVC C++, Flash SWF"
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Porting Phase Where Failure Occurred
+      options:
+        - "Step 1-2: Scaffolding & MIGRATE.md Initialization"
+        - "Phase 1: Binary Reverse Engineering (REVERSE-ENGINEERING.md)"
+        - "Phase 2: Asset Restructuring & 6-Language i18n (ASSETS-AND-I18N.md)"
+        - "Phase 3: Gameplay, StorageManager & Touch Input (GAMEPLAY-AND-STORAGE.md)"
+        - "Phase 4: Zero-Black-Screen Canvas & Responsive UI (CANVAS-AND-UI.md)"
+        - "Phase 5: Dual-Mode Audio Matrix (AUDIO-AND-VERIFICATION.md)"
+        - "Phase 6: Headless Browser Verification (verify-headless.py)"
+        - "Phase 7: grill-with-docs Self-Inspection Loop"
+    validations:
+      required: true
+  - type: textarea
+    id: observed-behavior
+    attributes:
+      label: Observed Agent Behavior vs. Expected Behavior
+      description: What did the agent do, what error or artifact was produced, and what should the skill have guided it to do instead?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Agent Harness & Model
+      placeholder: "e.g., Claude Code / Codex / Antigravity / Cursor + Model name"
+    validations:
+      required: true

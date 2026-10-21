@@ -1,0 +1,30 @@
+name: Skill Improvement (Grounded in Real Session)
+description: Propose a refinement to a phase specification based on a real porting session
+title: "[Improvement]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Per [`SCOPE.md`](../SCOPE.md), improvements must be grounded in a real porting session rather than hypothetical rewrites.
+  - type: input
+    id: target-module
+    attributes:
+      label: Disclosed Reference or Script Affected
+      placeholder: "e.g., skills/atb-game-porting/CANVAS-AND-UI.md or scripts/verify-headless.py"
+    validations:
+      required: true
+  - type: textarea
+    id: session-evidence
+    attributes:
+      label: Session Evidence & Motivation
+      description: Describe the real porting session that motivated this improvement and what failed without it.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-change
+    attributes:
+      label: Proposed Specification / Script Change
+      description: Outline the concrete rule or check to add.
+    validations:
+      required: true

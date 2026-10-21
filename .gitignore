@@ -148,3 +148,5 @@ vite.config.ts.timestamp-*
 # Turbo Repo
 .turbo
 .superpowers/
+__pycache__/
+*.py[cod]

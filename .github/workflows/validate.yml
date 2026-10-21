@@ -1,0 +1,36 @@
+name: Validate Skills
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  validate:
+    name: Validate Manifests, Links & Verifier Script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Repository Contract Checks
+        run: npm run check
+
+      - name: Verify Headless Verifier Script Compilation & CLI
+        run: |
+          python3 -m py_compile skills/atb-game-porting/scripts/verify-headless.py
+          python3 skills/atb-game-porting/scripts/verify-headless.py --help
+          ./scripts/list-skills.sh
