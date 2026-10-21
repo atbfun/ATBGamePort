@@ -167,6 +167,12 @@ cd ATBGamePort
   - [`AUDIO-AND-VERIFICATION.md`](./skills/atb-game-porting/AUDIO-AND-VERIFICATION.md)：Phase 5 双模音频矩阵、Phase 6 Headless Chrome 像素级验收与 Phase 7 `grill-with-docs` 自检循环。
   - [`scripts/verify-headless.py`](./skills/atb-game-porting/scripts/verify-headless.py)：自动化 Headless 浏览器零报错与 $\ge 90\%$ 彩色像素占比校验脚本。
 
+- **[atb-game-package](./skills/atb-game-package/SKILL.md)**（[详细说明文档](./docs/atb-game-package.md)）：零依赖 HTML5 游戏离线打包技能，生成内嵌 VFS 与运行时拦截层的单文件 `.html` 即点即玩包、带 macOS/Windows 原生双击启动器的便携目录及发行 `.zip`。
+  - [`SINGLE-FILE-VFS.md`](./skills/atb-game-package/SINGLE-FILE-VFS.md)：浏览器内存 VFS 拦截层、动态资源内联与 CORS/Canvas 污染消除规范。
+  - [`PORTABLE-LAUNCHER-AND-VERIFY.md`](./skills/atb-game-package/PORTABLE-LAUNCHER-AND-VERIFY.md)：macOS `.command` 与 Windows 原生 PowerShell `.bat` 双击启动器、Zip `0755` 权限及纯 `file:///` 无头验证规范。
+  - [`scripts/package-game.py`](./skills/atb-game-package/scripts/package-game.py)：纯 Python 3 标准库双模打包与启动器生成引擎。
+  - [`scripts/verify-package.py`](./skills/atb-game-package/scripts/verify-package.py)：基于纯 `file:///` 协议的无头 Chrome 自动化零报错与 $\ge 90\%$ 着色率验证脚本。
+
 ---
 
 ## 仓库治理规范

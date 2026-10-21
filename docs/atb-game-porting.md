@@ -40,6 +40,9 @@ In browser Canvas engines, a missing or corrupted image file reports `img.comple
 **How does the ported game work both on an HTTP server and when double-clicked via `file:///`?**
 Step 1 creates a `target/<game>/web/assets -> ../assets` symlink, and the asset/audio loaders implement bidirectional path fallback (`assets/` first, `../assets/` second). Simultaneously, the **Dual-Mode Audio Matrix** uses Web Audio API over HTTP and falls back to `HTMLAudioElement` cloning plus Web Audio synth tones when `file:///` blocks `fetch()` via CORS.
 
+**Can I package the finished port into an offline standalone file?**
+Yes. Use the companion skill `atb-game-package` (see [`docs/atb-game-package.md`](./atb-game-package.md)) or run `python3 skills/atb-game-package/scripts/package-game.py --input-dir target/<game>` to bundle the port into a single offline `<game>-standalone.html` file with embedded VFS or a portable folder with native double-click launchers.
+
 **Why is there a hard 1,000-line limit per file edit call?**
 Generating multi-thousand-line HTML5 Canvas engines in a single tool call frequently triggers model output truncation or infinite retry loops. Writing the structural skeleton first and filling in modules incrementally keeps every tool call deterministic and reviewable.
 

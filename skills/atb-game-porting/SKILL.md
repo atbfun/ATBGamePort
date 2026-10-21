@@ -84,3 +84,6 @@ Upon completing the initial `MIGRATE.md` specification and initial full codebase
 1. Call the Skill tool with `"grill-with-docs"` to audit architecture, async race conditions, missing asset fallbacks, audio pool exhaustion, and state machine edge cases.
 2. Unconditionally adopt all **Recommended Options** surfaced during the audit.
 3. Refactor the codebase and update `MIGRATE.md` in-place, then re-run [`scripts/verify-headless.py`](scripts/verify-headless.py) to confirm a clean green state before delivery.
+
+### Step 5: Optional Standalone Packaging (`atb-game-package`)
+To package the completed port into a zero-dependency offline bundle (`<game>-standalone.html` or portable directory with native launchers), invoke [`atb-game-package`](../atb-game-package/SKILL.md) or run `python3 skills/atb-game-package/scripts/package-game.py --input-dir target/<game_name>`.

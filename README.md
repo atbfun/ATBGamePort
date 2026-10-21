@@ -167,6 +167,12 @@ We built `atb-game-porting` to eliminate the four recurring failure modes that p
   - [`AUDIO-AND-VERIFICATION.md`](./skills/atb-game-porting/AUDIO-AND-VERIFICATION.md): Phase 5 Dual-Mode Audio Matrix, Phase 6 headless Chrome pixel verification, and Phase 7 `grill-with-docs` self-check loop.
   - [`scripts/verify-headless.py`](./skills/atb-game-porting/scripts/verify-headless.py): Automated headless Chrome zero-error and $\ge 90\%$ colored pixel ratio verifier.
 
+- **[atb-game-package](./skills/atb-game-package/SKILL.md)** ([docs](./docs/atb-game-package.md)): Zero-dependency offline packaging toolchain for HTML5 games, generating standalone `.html` bundles with embedded VFS and runtime interceptor shims, portable directories with native macOS/Windows double-click launchers, and distribution zip archives.
+  - [`SINGLE-FILE-VFS.md`](./skills/atb-game-package/SINGLE-FILE-VFS.md): In-browser VFS runtime shim, dynamic asset inlining, and CORS/Tainted Canvas elimination specification.
+  - [`PORTABLE-LAUNCHER-AND-VERIFY.md`](./skills/atb-game-package/PORTABLE-LAUNCHER-AND-VERIFY.md): Native macOS `.command` & Windows `.bat` launchers, Zip header `0755` permissions, and headless `file:///` verification.
+  - [`scripts/package-game.py`](./skills/atb-game-package/scripts/package-game.py): Pure Python 3 standard library offline bundler and launcher generator.
+  - [`scripts/verify-package.py`](./skills/atb-game-package/scripts/verify-package.py): Automated headless Chrome zero-error and $\ge 90\%$ colored pixel ratio verifier for direct `file:///` URLs.
+
 ---
 
 ## Repository Governance
