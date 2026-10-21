@@ -1,0 +1,23 @@
+{
+  "name": "atb-game-porting-skills",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Industrial-grade agent skill for reverse-engineering and porting classic desktop games to zero-dependency HTML5 Canvas, powered by fun.aitobox.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atbfun/ATBGamePort"
+  },
+  "license": "GPL-3.0",
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version && node scripts/sync-plugin-version.mjs",
+    "check-plugin-version": "node scripts/sync-plugin-version.mjs --check",
+    "validate": "node scripts/validate-skills.mjs",
+    "check": "npm run check-plugin-version && npm run validate"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.30.0"
+  },
+  "packageManager": "npm@10.9.4"
+}

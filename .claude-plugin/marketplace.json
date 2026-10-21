@@ -1,0 +1,23 @@
+{
+  "name": "atbfun",
+  "owner": {
+    "name": "ATBPort Team",
+    "url": "https://fun.aitobox.com"
+  },
+  "description": "Industrial-grade game reverse engineering and HTML5 Canvas porting skills powered by fun.aitobox.com.",
+  "plugins": [
+    {
+      "name": "atb-game-porting",
+      "source": "./",
+      "description": "End-to-end static reverse engineering, asset/i18n restructuring, and zero-black-screen HTML5 Canvas porting workflow for classic desktop games.",
+      "category": "engineering",
+      "keywords": [
+        "game-porting",
+        "reverse-engineering",
+        "html5-canvas",
+        "web-audio",
+        "i18n"
+      ]
+    }
+  ]
+}

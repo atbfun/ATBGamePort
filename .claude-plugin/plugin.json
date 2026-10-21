@@ -1,0 +1,24 @@
+{
+  "name": "atb-game-porting",
+  "version": "1.0.0",
+  "description": "Industrial-grade agent skill for static reverse engineering, automated asset & 6-language i18n restructuring, and zero-black-screen HTML5 Canvas porting of classic games. Powered by fun.aitobox.com.",
+  "author": {
+    "name": "ATBPort Team",
+    "url": "https://fun.aitobox.com"
+  },
+  "homepage": "https://fun.aitobox.com",
+  "repository": "https://github.com/atbfun/ATBGamePort",
+  "license": "GPL-3.0",
+  "keywords": [
+    "game-porting",
+    "reverse-engineering",
+    "html5-canvas",
+    "web-audio",
+    "i18n",
+    "skills",
+    "aitobox"
+  ],
+  "skills": [
+    "./skills/atb-game-porting"
+  ]
+}
