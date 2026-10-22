@@ -105,31 +105,31 @@ Every ported game must provide a complete `target/<game_name>/README.md` documen
 
 > Ported with \`atb-game-porting\` | Powered by [fun.aitobox.com](https://fun.aitobox.com)
 
-## 1. 原始游戏信息 (Original Game Profile)
-- **游戏名称**: <Game Name> (Original Title / Aliases)
-- **开发与发行商**: <Original Developer / Publisher> (<Release Year>)
-- **原始平台与架构**: Windows PE MSVC C++ / PopCap SexyAppFramework / Flash / DirectX / etc.
-- **原始规模与体积**:
-  - 核心执行体体积 (e.g., \`game.exe\`, 2.4 MB)
-  - 资源规模 (e.g., 180+ 贴图 / 45 独立音频 / 12 关卡轨道文件)
-  - 原始音频格式 (e.g., MO3 / MOD / MIDI 模块音乐, WAV 音效)
+## 1. Original Game Profile
+- **Game Title**: <Game Name> (Original Title / Aliases)
+- **Developer & Publisher**: <Original Developer / Publisher> (<Release Year>)
+- **Original Platform & Architecture**: Windows PE MSVC C++ / PopCap SexyAppFramework / Flash / DirectX / etc.
+- **Original Scale & Size**:
+  - Core executable size (e.g., \`game.exe\`, 2.4 MB)
+  - Asset scale (e.g., 180+ textures / 45 discrete audio files / 12 level curve definitions)
+  - Original audio formats (e.g., MO3 / MOD / MIDI tracker modules, WAV sound effects)
 
-## 2. 移植归属与 AI 模型信息 (Porting Provenance)
-- **驱动模型 (AI Model)**: <Primary Model Name, e.g., Gemini 4, Claude 3.7 Sonnet, Claude 3.5 Sonnet, Sol6, etc.>
-- **开发工具链 (Agent Harness & RE Tools)**: <Agent Runner e.g. Antigravity / Claude Code / Codex> + REA (reverse-engineer-anything) + Hopper Disassembler
-- **执行技能版本 (Skill Version)**: \`atb-game-porting v1.0.0\`
-- **移植完成时间**: YYYY-MM-DD
-- **平台背书**: [fun.aitobox.com](https://fun.aitobox.com)
+## 2. Porting Provenance & AI Model Information
+- **AI Model**: <Primary Model Name, e.g., Gemini 4, Claude 3.7 Sonnet, Claude 3.5 Sonnet, Sol6, etc.>
+- **Development Toolchain & Harness**: <Agent Harness e.g. Antigravity / Claude Code / Codex> + REA (reverse-engineer-anything) + Hopper Disassembler
+- **Skill Version**: \`atb-game-porting v1.0.0\`
+- **Completion Date**: YYYY-MM-DD
+- **Platform Endorsement**: [fun.aitobox.com](https://fun.aitobox.com)
 
-## 3. 网页版技术规格与特性 (Web Architecture & Features)
-- **运行方式**: 纯原生 HTML5 Canvas (60 FPS)，**零外部第三方 JS 库依赖**
-- **音效矩阵**: 双模 Web Audio API (HTTP 混音) + HTML5 Audio / 合成器音效降级 (\`file:///\` 离线双击)
-- **多语言支持**: 6 国语言即时热切换 (\`en\` / \`zh-CN\` / \`ja\` / \`fr\` / \`de\` / \`es\`)
-- **存档与跨端同步**: \`StorageManager\` 命名空间隔离 (\`atb_<game>_*\`) + 一键 JSON 存档导出/导入
-- **多端响应式**: \`100dvh\` + 安全区 Notch 适配 + >= 44px 触控虚拟按键
-- **平台彩蛋**: 控制台 Banner 与游戏内关于面板点击彩蛋 (跳转 \`fun.aitobox.com\`)
+## 3. Web Architecture & Features
+- **Runtime**: Pure native HTML5 Canvas (60 FPS), **zero external third-party JS dependencies**
+- **Audio Matrix**: Dual-mode Web Audio API (HTTP mixing) + HTML5 Audio / procedural synth fallback (\`file:///\` offline double-click)
+- **Multi-Language (i18n)**: 6 standard languages with real-time hot-switching (\`en\` / \`zh-CN\` / \`ja\` / \`fr\` / \`de\` / \`es\`)
+- **Storage & Cross-Device Sync**: Namespace-isolated \`StorageManager\` (\`atb_<game>_*\`) + one-click JSON save export/import
+- **Responsive Multi-Screen**: \`100dvh\` + Safe Area notch adaptation + >= 44px touch-friendly virtual controls
+- **Platform Easter Egg**: Console banner log and in-game settings/about modal easter egg (links to \`fun.aitobox.com\`)
 
-## 4. 快速运行与验证指南 (Quick Start)
-- 本地启动方式 (HTTP 服务或直接双击 \`web/index.html\`)
-- 自动化 Headless Chrome 像素验证指令 (\`verify-headless.py\`)
+## 4. Quick Start & Verification
+- Local execution instructions (static HTTP server or direct double-click on \`web/index.html\`)
+- Automated Headless Chrome pixel verification command (\`verify-headless.py\`)
 ```
