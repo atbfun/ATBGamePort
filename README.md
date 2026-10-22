@@ -24,8 +24,8 @@ A plugin updates itself automatically when new versions release. [skills.sh](htt
 # 1. Ensure Python 3 (3.10+ recommended) is installed
 python3 --version
 
-# 2. Install grill-with-docs (from mattpocock/skills) for Phase 7 self-inspection
-npx skills@latest add mattpocock/skills --skill=grill-with-docs
+# 2. Install grill-me (from mattpocock/skills) for Phase 7 self-inspection
+npx skills@latest add mattpocock/skills --skill=grill-me
 
 # 3. Ensure the reverse-engineer-anything (REA) skill & MCP server are enabled in your agent
 ```
@@ -218,7 +218,7 @@ We built `atb-game-porting` to eliminate the four recurring failure modes that p
 
 **The Problem**: Long multi-phase instructions cause agents to rush later phases or claim victory without ever opening a browser.
 
-**The Fix**: `atb-game-porting` uses **Progressive Disclosure** (keeping [`SKILL.md`](./skills/atb-game-porting/SKILL.md) under 110 lines and loading phase specs on demand), tracks state in [`source/<game>/MIGRATE.md`](./skills/atb-game-porting/MIGRATE-TEMPLATE.md), requires running [`scripts/verify-headless.py`](./skills/atb-game-porting/scripts/verify-headless.py) (proving `0` console errors and $\ge 90\%$ colored pixel ratio across 3 snapshots), and finishes with a mandatory `grill-with-docs` self-inspection loop.
+**The Fix**: `atb-game-porting` uses **Progressive Disclosure** (keeping [`SKILL.md`](./skills/atb-game-porting/SKILL.md) under 110 lines and loading phase specs on demand), tracks state in [`source/<game>/MIGRATE.md`](./skills/atb-game-porting/MIGRATE-TEMPLATE.md), requires running [`scripts/verify-headless.py`](./skills/atb-game-porting/scripts/verify-headless.py) (proving `0` console errors and $\ge 90\%$ colored pixel ratio across 3 snapshots), and finishes with a mandatory `grill-me` self-inspection loop.
 
 ---
 
@@ -232,7 +232,7 @@ We built `atb-game-porting` to eliminate the four recurring failure modes that p
   - [`ASSETS-AND-I18N.md`](./skills/atb-game-porting/ASSETS-AND-I18N.md): Phase 2 32-bit RGB+Alpha composition, tracker audio transcoding, and 6-language i18n specification.
   - [`GAMEPLAY-AND-STORAGE.md`](./skills/atb-game-porting/GAMEPLAY-AND-STORAGE.md): Phase 3 physics fidelity, `StorageManager`, cross-device JSON save sync, and mobile touch normalization.
   - [`CANVAS-AND-UI.md`](./skills/atb-game-porting/CANVAS-AND-UI.md): Phase 4 Zero-Black-Screen Guard, `100dvh` safe-area responsive layout, and `fun.aitobox.com` interactive easter egg specification.
-  - [`AUDIO-AND-VERIFICATION.md`](./skills/atb-game-porting/AUDIO-AND-VERIFICATION.md): Phase 5 Dual-Mode Audio Matrix, Phase 6 headless Chrome pixel verification, and Phase 7 `grill-with-docs` self-check loop.
+  - [`AUDIO-AND-VERIFICATION.md`](./skills/atb-game-porting/AUDIO-AND-VERIFICATION.md): Phase 5 Dual-Mode Audio Matrix, Phase 6 headless Chrome pixel verification, and Phase 7 `grill-me` self-check loop.
   - [`scripts/verify-headless.py`](./skills/atb-game-porting/scripts/verify-headless.py): Automated headless Chrome zero-error and $\ge 90\%$ colored pixel ratio verifier.
 
 - **[atb-game-package](./skills/atb-game-package/SKILL.md)** ([docs](./docs/atb-game-package.md)): Zero-dependency offline packaging toolchain for HTML5 games, generating standalone `.html` bundles with embedded VFS and runtime interceptor shims, portable directories with native macOS/Windows double-click launchers, and distribution zip archives.

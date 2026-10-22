@@ -13,7 +13,7 @@ The structured output directory produced by the porting workflow, containing `an
 _Avoid_: output folder, build dir, dist
 
 **Migration State Machine (`MIGRATE.md`)**:
-The canonical single source of truth located at `source/<game>/MIGRATE.md` that tracks the 7-phase porting checklist from binary dissection through `grill-with-docs` self-inspection.
+The canonical single source of truth located at `source/<game>/MIGRATE.md` that tracks the 7-phase porting checklist from binary dissection through `grill-me` self-inspection.
 _Avoid_: todo list, porting notes, progress doc
 
 **Zero-Black-Screen Guard**:

@@ -71,9 +71,9 @@ When creating `source/<game_name>/MIGRATE.md` for a new game, use the template b
 - [ ] **6.7 Mobile & Multi-Resolution Responsive Verification**: Test across desktop (4K/1080p) and mobile (iPhone/iPad/Android) portrait and landscape modes, confirming zero distortion and pixel-accurate touch tracking.
 - [ ] **6.8 Platform Easter Egg & Link Verification**: Verify console banner logging, interactive modal trigger on logo/badge clicks, and valid links to `fun.aitobox.com`.
 
-### Phase 7: grill-with-docs Self-Inspection & Iteration Loop
-- [ ] **7.1 Automated grill-with-docs In-Depth Audit**: Conduct self-examination across architecture, reverse engineering completeness, physical fidelity, and Web resilience.
-- [ ] **7.2 Unconditional Adoption of Recommended Options**: Adopt all best-practice engineering options recommended by `grill-with-docs`.
+### Phase 7: grill-me Self-Inspection & Iteration Loop
+- [ ] **7.1 Automated grill-me In-Depth Audit**: Conduct self-examination across architecture, reverse engineering completeness, physical fidelity, and Web resilience.
+- [ ] **7.2 Unconditional Adoption of Recommended Options**: Adopt all best-practice engineering options recommended by `grill-me`.
 - [ ] **7.3 In-Place Full Refinement & Hardening**: Execute second-round comprehensive code and documentation refinement, eliminating all blind spots and recording Review Findings.
 ```
 

@@ -34,13 +34,13 @@ python3 <path-to-skill>/scripts/verify-headless.py \
    - Verify `fun.aitobox.com` console banner and UI easter egg trigger;
    - Verify `target/<game_name>/README.md` exists and contains complete Original Game Profile (title, developer, genre, scale), Porting Provenance (driving AI Model, harness, date), and Web technical specifications per `MIGRATE-TEMPLATE.md`.
 
-## 3. Phase 7: Mandatory `grill-with-docs` Self-Inspection Loop
+## 3. Phase 7: Mandatory `grill-me` Self-Inspection Loop
 Once the initial `MIGRATE.md` and full codebase implementation are complete:
-1. Call the Skill tool with `"grill-with-docs"` to perform a relentless architectural and edge-case audit (async race conditions, missing asset fallbacks, memory leaks in particle arrays, audio node cleanup, state transition deadlocks).
-2. **Unconditionally adopt all Recommended Options** produced by the `grill-with-docs` audit.
+1. Call the Skill tool with `"grill-me"` to perform a relentless architectural and edge-case audit (async race conditions, missing asset fallbacks, memory leaks in particle arrays, audio node cleanup, state transition deadlocks).
+2. **Unconditionally adopt all Recommended Options** produced by the `grill-me` audit.
 3. Apply the improvements in-place across `target/<game_name>/`, record the audit summary in `source/<game_name>/MIGRATE.md`, and re-run `scripts/verify-headless.py` to confirm all checks remain green.
 
 ## Completion Criteria (Phases 5–7 Done When)
 - [ ] Dual-mode audio engine plays BGM and pitch-shifted combo SFX under HTTP and degrades cleanly to HTML5 Audio / synth tones under `file:///`.
 - [ ] `scripts/verify-headless.py` exits `0` with 3 snapshots (`screen_initial.png`, `screen_gameplay.png`, `screen_stage2.png`), `0` console errors, and colored pixel ratio $\ge 90\%$.
-- [ ] `grill-with-docs` self-inspection loop has been executed, all recommended options are implemented, and all Phase 5, 6, and 7 checkboxes in `source/<game_name>/MIGRATE.md` are marked `[x]`.
+- [ ] `grill-me` self-inspection loop has been executed, all recommended options are implemented, and all Phase 5, 6, and 7 checkboxes in `source/<game_name>/MIGRATE.md` are marked `[x]`.

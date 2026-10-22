@@ -11,8 +11,8 @@ A plugin updates itself when `.claude-plugin/plugin.json` `version` increments; 
 # 1. Ensure Python 3 (3.10+ recommended) is installed
 python3 --version
 
-# 2. Install grill-with-docs (from mattpocock/skills) for Phase 7 self-inspection
-npx skills@latest add mattpocock/skills --skill=grill-with-docs
+# 2. Install grill-me (from mattpocock/skills) for Phase 7 self-inspection
+npx skills@latest add mattpocock/skills --skill=grill-me
 
 # 3. Ensure reverse-engineer-anything (REA) skill & MCP server are enabled in your agent
 ```

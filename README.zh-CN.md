@@ -24,8 +24,8 @@
 # 1. 确保已安装 Python 3（推荐 Python 3.10+）
 python3 --version
 
-# 2. 安装 grill-with-docs（来自 mattpocock/skills），用于 Phase 7 自动化深度自检
-npx skills@latest add mattpocock/skills --skill=grill-with-docs
+# 2. 安装 grill-me（来自 mattpocock/skills），用于 Phase 7 自动化深度自检
+npx skills@latest add mattpocock/skills --skill=grill-me
 
 # 3. 确保你的 Agent 环境已启用 reverse-engineer-anything (REA) 技能与 MCP 服务
 ```
@@ -218,7 +218,7 @@ python3 /path/to/ATBGamePort/skills/atb-game-package/scripts/package-game.py --i
 
 **痛点**：当把几百行指令塞进单个 `SKILL.md` 时，Agent 看到后面还有好几个阶段就会草率略过当前阶段，甚至不打开浏览器验证就宣称“移植完成”。
 
-**解法**：遵循 `writing-for-agents` 的**渐进式披露（Progressive Disclosure）**原则，将 [`SKILL.md`](./skills/atb-game-porting/SKILL.md) 精简为 ~100 行的阶段路由主干，按阶段动态加载专项规范文件；以 [`source/<game>/MIGRATE.md`](./skills/atb-game-porting/MIGRATE-TEMPLATE.md) 作为唯一状态机；强制执行 [`scripts/verify-headless.py`](./skills/atb-game-porting/scripts/verify-headless.py)（0 Console 报错 + 3 张实机截图彩色像素率 $\ge 90\%$）以及 Phase 7 的 `grill-with-docs` 自动化自检迭代循环。
+**解法**：遵循 `writing-for-agents` 的**渐进式披露（Progressive Disclosure）**原则，将 [`SKILL.md`](./skills/atb-game-porting/SKILL.md) 精简为 ~100 行的阶段路由主干，按阶段动态加载专项规范文件；以 [`source/<game>/MIGRATE.md`](./skills/atb-game-porting/MIGRATE-TEMPLATE.md) 作为唯一状态机；强制执行 [`scripts/verify-headless.py`](./skills/atb-game-porting/scripts/verify-headless.py)（0 Console 报错 + 3 张实机截图彩色像素率 $\ge 90\%$）以及 Phase 7 的 `grill-me` 自动化自检迭代循环。
 
 ---
 
@@ -232,7 +232,7 @@ python3 /path/to/ATBGamePort/skills/atb-game-package/scripts/package-game.py --i
   - [`ASSETS-AND-I18N.md`](./skills/atb-game-porting/ASSETS-AND-I18N.md)：Phase 2 32 位透明 PNG 合成、追踪音乐转码与 6 国语言 i18n 规范。
   - [`GAMEPLAY-AND-STORAGE.md`](./skills/atb-game-porting/GAMEPLAY-AND-STORAGE.md)：Phase 3 核心物理状态机、`StorageManager`、跨端 JSON 存档导入导出与触控归一化规范。
   - [`CANVAS-AND-UI.md`](./skills/atb-game-porting/CANVAS-AND-UI.md)：Phase 4 零黑屏 5 大防御铁律、`100dvh` 响应式安全区适配与 `fun.aitobox.com` 互动彩蛋规范。
-  - [`AUDIO-AND-VERIFICATION.md`](./skills/atb-game-porting/AUDIO-AND-VERIFICATION.md)：Phase 5 双模音频矩阵、Phase 6 Headless Chrome 像素级验收与 Phase 7 `grill-with-docs` 自检循环。
+  - [`AUDIO-AND-VERIFICATION.md`](./skills/atb-game-porting/AUDIO-AND-VERIFICATION.md)：Phase 5 双模音频矩阵、Phase 6 Headless Chrome 像素级验收与 Phase 7 `grill-me` 自检循环。
   - [`scripts/verify-headless.py`](./skills/atb-game-porting/scripts/verify-headless.py)：自动化 Headless 浏览器零报错与 $\ge 90\%$ 彩色像素占比校验脚本。
 
 - **[atb-game-package](./skills/atb-game-package/SKILL.md)**（[详细说明文档](./docs/atb-game-package.md)）：零依赖 HTML5 游戏离线打包技能，生成内嵌 VFS 与运行时拦截层的单文件 `.html` 即点即玩包、带 macOS/Windows 原生双击启动器的便携目录及发行 `.zip`。

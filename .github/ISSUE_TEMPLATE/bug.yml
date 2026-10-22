@@ -27,7 +27,7 @@ body:
         - "Phase 4: Zero-Black-Screen Canvas & Responsive UI (CANVAS-AND-UI.md)"
         - "Phase 5: Dual-Mode Audio Matrix (AUDIO-AND-VERIFICATION.md)"
         - "Phase 6: Headless Browser Verification (verify-headless.py)"
-        - "Phase 7: grill-with-docs Self-Inspection Loop"
+        - "Phase 7: grill-me Self-Inspection Loop"
     validations:
       required: true
   - type: textarea
