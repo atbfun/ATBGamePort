@@ -117,7 +117,7 @@ Links `skills/atb-game-porting` directly into `~/.claude/skills` and `~/.agents/
 
 ## End-to-End Walkthrough: Porting & Publishing a Game
 
-Here is a complete real-world example porting, publishing, and packaging a game named `gameA`:
+Here is a complete real-world example of porting, publishing, and packaging a game named `gameA`:
 
 ### 1. Place the original game in `source/gameA`
 Place your classic desktop game assets, executables (`.exe`), media, and data files into:
