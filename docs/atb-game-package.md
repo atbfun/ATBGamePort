@@ -66,7 +66,7 @@ When images are loaded from external files under `file:///`, browsers treat them
 It uses Windows PowerShell's built-in `.NET System.Net.HttpListener` class, which has been part of standard Windows since Windows 7. It creates a local HTTP server bound to loopback `127.0.0.1` and opens the default browser without any third-party dependencies.
 
 **Why does `Play-macOS.command` need special handling in the release zip?**  
-Standard zip tools often strip the Unix `0755` executable permission bit. When users extract the zip, double-clicking `.command` triggers an permission denied error. `package-game.py` explicitly embeds Unix `0755` permission attributes in the zip file header.
+Standard zip tools often strip the Unix `0755` executable permission bit. When users extract the zip, double-clicking `.command` triggers a permission denied error. `package-game.py` explicitly embeds Unix `0755` permission attributes in the zip file header.
 
 ## It's working if
 
