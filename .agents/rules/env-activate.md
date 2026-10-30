@@ -2,5 +2,5 @@
 trigger: always_on
 ---
 
-* Please exec commands list to activate dev env before do work
+* Please run the command below to activate the dev environment before starting work
   - `conda activate ATBPort`
